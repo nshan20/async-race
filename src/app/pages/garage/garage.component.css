@@ -1,0 +1,113 @@
+.raceManagementPanel {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .managementPanel {
+    display: flex;
+    justify-content: space-between;
+    /*min-width: 150px;*/
+
+    button {
+      cursor: pointer;
+    }
+
+    input, button {
+      margin: 10px;
+      border: none;
+      background: #ececec;
+      border-radius: 5px;
+    }
+
+    .race {
+      background-color: white;
+      color: black;
+    }
+
+    .reset {
+    }
+
+    .create {
+    }
+
+    .update {
+    }
+
+    .generate {
+    }
+
+  }
+}
+
+.table-cars {
+  width: 100%;
+}
+
+.td-row {
+  overflow: hidden
+}
+
+.car-item {
+  display: flex;
+
+  .car-controls {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      border: none;
+      background: #ececec;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 1px;
+      padding: 7px;
+      font-size: 8px;
+    }
+  }
+
+  .car-row {
+    width: 100%;
+    background: #baea15;
+    position: relative;
+
+    .route {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin: auto;
+      width: calc(100% - 100px);
+
+      .finish {
+        height: 50px;
+
+        img {
+          height: 100%;
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    .car {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+
+      .car-lain {
+        width: calc( 100% - 50px);
+        height: 100%;
+        margin-left: 0;
+
+        .material-symbols-outlined {
+          font-size: 50px;
+          margin-left: 0%;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+

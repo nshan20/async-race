@@ -1,0 +1,23 @@
+.content {
+  width: 95%;
+  margin: auto;
+  .nav{
+    display: flex;
+    height: min-content;
+    button{
+      padding: 10px;
+      margin: 10px;
+      width: 100px;
+      border: none;
+      background: #ececec;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .active-link{
+      background: #04AA6D;
+    }
+  }
+  .pages{
+    width: 100%;
+  }
+}

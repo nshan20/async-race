@@ -1,21 +1,21 @@
 <div class="raceManagementPanel">
   <div class="managementPanel">
-    <button class="race" (click)="startAnimation()"> RACE</button>
+    <button class="race" (click)="startAnimation()" > RACE</button>
     <button class="reset" (click)="resetAnimation()"> RESET</button>
 
   </div>
   <div class="managementPanel">
-    <input type="text" placeholder="TYPE CAR BRAND">
-    <input type="color">
-    <button class="create">CREATE</button>
+    <input type="text" placeholder="TYPE CAR BRAND" [(ngModel)]="createCarText">
+    <input type="color" [(ngModel)]="createCarColor">
+    <button class="create" (click)="createCar()" [disabled]="!createCarText || finishAnimation">CREATE</button>
   </div>
   <div class="managementPanel">
-    <input type="text" placeholder="TYPE CAR BRAND">
-    <input type="color">
-    <button class="update">UPDATE</button>
+    <input type="text" placeholder="TYPE CAR BRAND" [(ngModel)]="updateCarText">
+    <input type="color" [(ngModel)]="updateCarColor">
+    <button class="update" (click)="updateCar()" [disabled]="!updateCarText || finishAnimation">UPDATE</button>
   </div>
   <div class="managementPanel">
-    <button class="generate">GENERATE CARS</button>
+    <button class="generate" (click)="generateCars()" [disabled]="finishAnimation">GENERATE CARS</button>
   </div>
 </div>
 
@@ -33,19 +33,19 @@
             <div class="car-item">
 
               <div class="car-controls">
-                <button>SELECT</button>
-                <button>REMOVE</button>
+                <button (click)="selectCar(customer)" [disabled]="finishAnimation">SELECT</button>
+                <button (click)="removeCars(customer.id)" [disabled]="finishAnimation">REMOVE</button>
               </div>
 
               <div class="car-controls">
-                <button >A</button>
-                <button >B</button>
+                <button (click)="startThisCar(rowIndex)" [disabled]="finishAnimation">A</button>
+                <button (click)="resetThisCar(rowIndex)" [disabled]="finishAnimation">B</button>
               </div>
 
               <div class="car-row">
 
                 <div class="car">
-                  <div class="car-lain" #boxContainer style="position: relative">
+                  <div class="car-lain" #carContainer style="position: relative">
                      <span class="material-symbols-outlined icon box"
                            [ngStyle]="{ 'margin-left': + positions[rowIndex] +'%' }"
                            [style.color]="customer.color">local_shipping</span>
@@ -71,6 +71,15 @@
   </div>
 
 </div>
+
+<div class="modal-overlay" *ngIf="isModalOpen">
+  <div class="modal">
+    <h2>Winner</h2>
+    <p>{{winnerName}}</p>
+    <p>{{winnerTime}} S</p>
+  </div>
+</div>
+
 
 
 

@@ -1,0 +1,27 @@
+<p-table
+  [value]="customers"
+  [paginator]="true"
+  [rows]="7"
+>
+  <ng-template #header>
+    <tr>
+      <th style="width:20%">NUMBER</th>
+      <th style="width:20%">CAR</th>
+      <th style="width:20%">NAME</th>
+      <th style="width:20%">WINS</th>
+      <th style="width:20%">BEST TIME (SECONDS)</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-customer>
+    <tr>
+      <td>{{ customer.id }}</td>
+      <td>
+        <span class="material-symbols-outlined icon box"
+              [style.color]="customer.color">local_shipping</span>
+      </td>
+      <td>{{ customer.name }}</td>
+      <td>{{ customer.wins }}</td>
+      <td>{{ customer.time }} </td>
+    </tr>
+  </ng-template>
+</p-table>

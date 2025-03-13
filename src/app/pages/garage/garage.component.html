@@ -33,19 +33,19 @@
             <div class="car-item">
 
               <div class="car-controls">
-                <button (click)="selectCar(customer)" [disabled]="finishAnimation">SELECT</button>
-                <button (click)="removeCars(customer.id)" [disabled]="finishAnimation">REMOVE</button>
+                <button>SELECT</button>
+                <button>REMOVE</button>
               </div>
 
               <div class="car-controls">
-                <button (click)="startThisCar(rowIndex)" [disabled]="finishAnimation">A</button>
-                <button (click)="resetThisCar(rowIndex)" [disabled]="finishAnimation">B</button>
+                <button >A</button>
+                <button >B</button>
               </div>
 
               <div class="car-row">
 
                 <div class="car">
-                  <div class="car-lain" #carContainer style="position: relative">
+                  <div class="car-lain" #boxContainer style="position: relative">
                      <span class="material-symbols-outlined icon box"
                            [ngStyle]="{ 'margin-left': + positions[rowIndex] +'%' }"
                            [style.color]="customer.color">local_shipping</span>
@@ -72,10 +72,5 @@
 
 </div>
 
-<div class="modal-overlay" *ngIf="isModalOpen">
-  <div class="modal">
-    <h2>Winner</h2>
-    <p>{{winnerName}}</p>
-    <p>{{winnerTime}} S</p>
-  </div>
-</div>
+
+

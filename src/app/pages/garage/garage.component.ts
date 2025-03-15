@@ -55,7 +55,7 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
     const pageGarage = localStorage.getItem('pageGarage');
     if (pageGarage) {
       this.first = JSON.parse(pageGarage);
-    }else {
+    } else {
 
     }
   }
@@ -94,7 +94,7 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
     if (savedSpeeds) {
       this.speeds = JSON.parse(savedSpeeds);
     } else {
-      this.speeds = this.generateUniqueRandomSpeeds(this.customers.length, this.minNumberRandom,  this.maxNumberRandom);
+      this.speeds = this.generateUniqueRandomSpeeds(this.customers.length, this.minNumberRandom, this.maxNumberRandom);
     }
   }
 
@@ -341,13 +341,14 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.stopAnimation();
-  }
+
 
   onPageChange(event: any) {
     this.first = event.first;
     localStorage.setItem('pageGarage', JSON.stringify(this.first));
   }
 
+  ngOnDestroy() {
+    this.stopAnimation();
+  }
 }

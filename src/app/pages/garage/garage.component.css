@@ -77,6 +77,9 @@
       margin: auto;
       width: calc(100% - 100px);
 
+      p{
+        z-index: 1;
+      }
       .finish {
         height: 50px;
 
@@ -93,7 +96,7 @@
       height: 100%;
 
       .car-lain {
-        width: calc( 100% - 50px);
+        width: calc(100% - 50px);
         height: 100%;
         margin-left: 0;
 
@@ -124,7 +127,30 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+.carName {
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100px;
+  text-overflow: ellipsis;
+}
 
+.carName:hover {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  width: auto;
+}
 
+::ng-deep .p-paginator .p-paginator-pages .p-paginator-page {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
 
+::ng-deep .p-paginator-page-selected{
+  background-color: #007bff !important;
+  color: white !important;
+  width: 20px;
+  height: 20px;
+}
 

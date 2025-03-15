@@ -1,0 +1,27 @@
+.carName {
+  overflow: hidden;
+  width: 100px;
+  text-overflow: ellipsis;
+  padding: 0;
+  margin: 0;
+}
+
+.carName:hover {
+  overflow: visible;
+  text-overflow: clip;
+  width: auto;
+}
+
+
+::ng-deep .p-paginator .p-paginator-pages .p-paginator-page {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+::ng-deep .p-paginator-page-selected{
+  background-color: #007bff !important;
+  color: white !important;
+  width: 20px;
+  height: 20px;
+}

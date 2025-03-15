@@ -12,6 +12,7 @@
       background: #ececec;
       border-radius: 5px;
       cursor: pointer;
+      z-index: 2;
     }
     .active-link{
       background: #04AA6D;

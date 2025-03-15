@@ -39,17 +39,25 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
   winnerTime: number = 0;
   winnerName: string = "";
   finishAnimation: boolean = false;
-
+  first = 0;
+  minNumberRandom = 0.001;
+  maxNumberRandom = 0.1;
 
 
   constructor(
     private carsService: CarsService,
     private winnersService: WinnersService,
-    ) {
+  ) {
   }
 
   ngOnInit() {
     this.getAllCars();
+    const pageGarage = localStorage.getItem('pageGarage');
+    if (pageGarage) {
+      this.first = JSON.parse(pageGarage);
+    }else {
+
+    }
   }
 
   private getAllCars() {
@@ -86,7 +94,7 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
     if (savedSpeeds) {
       this.speeds = JSON.parse(savedSpeeds);
     } else {
-      this.speeds = this.generateUniqueRandomSpeeds(this.customers.length, 0.001, 0.1);
+      this.speeds = this.generateUniqueRandomSpeeds(this.customers.length, this.minNumberRandom,  this.maxNumberRandom);
     }
   }
 
@@ -136,7 +144,6 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
           this.positions[i] = this.maxWidth;
 
           if (this.positions.filter(position => position >= this.maxWidth).length === this.positions.length) {
-            this.finishAnimation = false;
             return;
           }
 
@@ -147,6 +154,7 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
               this.hasLoggedChampion = true;
             }
           }
+
         }
         allBoxesAtEnd = false;
       }
@@ -196,11 +204,6 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
     this.animationFrameId = null;
   }
 
-
-  ngOnDestroy() {
-    this.stopAnimation();
-  }
-
   createCar() {
     let carObj: Car = {
       name: this.createCarText,
@@ -235,7 +238,7 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
 
     let carObj: Car = {
       name: this.updateCarText,
-      color: this.updateCarColor,
+      color: this.updateCarColor || "#000000",
     }
 
     this.carsService.putCars(carObj, this.carCloneId).subscribe(
@@ -281,7 +284,7 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   createWinner(time: number, car: Car) {
-    if (car.id){
+    if (car.id) {
       this.winnersService.getByIdWinners(car.id).subscribe(
         (winner: any) => {
           let objWinner: WinnersModel = {
@@ -289,7 +292,7 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
             time: time > winner.time ? winner.time : time,
           }
 
-          if (car.id){
+          if (car.id) {
             this.winnersService.putWinners(objWinner, car.id).subscribe(
               (winner) => {
               }
@@ -321,7 +324,9 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
 
     for (let i = 0; i < 100; i++) {
       const randomName = carNames[Math.floor(Math.random() * carNames.length)] + " " + (Math.floor(Math.random() * 1000));
-      const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0")}`;
+      // const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0")}`;
+      const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0").toUpperCase()}`;
+
 
       const carObj: Car = {
         name: randomName,
@@ -334,6 +339,15 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
     forkJoin(requests).subscribe(() => {
       this.getAllCars();
     });
+  }
+
+  ngOnDestroy() {
+    this.stopAnimation();
+  }
+
+  onPageChange(event: any) {
+    this.first = event.first;
+    localStorage.setItem('pageGarage', JSON.stringify(this.first));
   }
 
 }

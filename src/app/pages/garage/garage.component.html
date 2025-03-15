@@ -19,13 +19,15 @@
   </div>
 </div>
 
-<div class="table-cars">
+<div class="table-cars" *ngIf="customers.length">
 
   <div class="card">
     <p-table
       [value]="customers"
       [paginator]="true"
-      [rows]="7">
+      [rows]="7"
+      [first]="first"
+      (onPage)="onPageChange($event)">
 
       <ng-template #body let-customer let-rowIndex="rowIndex">
         <tr>
@@ -33,20 +35,20 @@
             <div class="car-item">
 
               <div class="car-controls">
-                <button>SELECT</button>
-                <button>REMOVE</button>
+                <button (click)="selectCar(customer)" [disabled]="finishAnimation">SELECT</button>
+                <button (click)="removeCars(customer.id)" [disabled]="finishAnimation">REMOVE</button>
               </div>
 
               <div class="car-controls">
-                <button >A</button>
-                <button >B</button>
+                <button (click)="startThisCar(rowIndex)" [disabled]="finishAnimation">A</button>
+                <button (click)="resetThisCar(rowIndex)" [disabled]="finishAnimation">B</button>
               </div>
 
               <div class="car-row">
 
                 <div class="car">
-                  <div class="car-lain" #boxContainer style="position: relative">
-                     <span class="material-symbols-outlined icon box"
+                  <div class="car-lain" #carContainer style="position: relative">
+                     <span class="material-symbols-outlined"
                            [ngStyle]="{ 'margin-left': + positions[rowIndex] +'%' }"
                            [style.color]="customer.color">local_shipping</span>
                   </div>
@@ -54,7 +56,7 @@
                 </div>
 
                 <div class="route">
-                  <p>{{ customer.name }}</p>
+                  <p class="carName">{{ customer.name }}</p>
                   <div class="finish">
                     <img src="images/finish.png" alt="Garage Finish">
                   </div>
@@ -72,5 +74,16 @@
 
 </div>
 
+<div *ngIf="!customers.length">
+  <h1>no Cars</h1>
+</div>
+
+<div class="modal-overlay" *ngIf="isModalOpen">
+  <div class="modal">
+    <h2>Winner</h2>
+    <p>{{winnerName}}</p>
+    <p>{{winnerTime}} S</p>
+  </div>
+</div>
 
 

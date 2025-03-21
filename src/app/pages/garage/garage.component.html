@@ -48,9 +48,13 @@
 
                 <div class="car">
                   <div class="car-lain" #carContainer style="position: relative">
-                     <span class="material-symbols-outlined"
-                           [ngStyle]="{ 'margin-left': + positions[rowIndex] +'%' }"
-                           [style.color]="customer.color">local_shipping</span>
+<!--                     <span class="material-symbols-outlined"-->
+<!--                           [ngStyle]="{ 'margin-left': + positions[rowIndex] +'%' }"-->
+<!--                           [style.color]="customer.color">local_shipping</span>-->
+
+                    <i class="fa-duotone fa-solid fa-car-side material-symbols-outlined"
+                       [ngStyle]="{ 'margin-left': + positions[rowIndex] +'%' }"
+                       [style.color]="customer.color"></i>
                   </div>
 
                 </div>
@@ -85,5 +89,3 @@
     <p>{{winnerTime}} S</p>
   </div>
 </div>
-
-

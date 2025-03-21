@@ -323,8 +323,8 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
     const requests = [];
 
     for (let i = 0; i < 100; i++) {
-      const randomName = carNames[Math.floor(Math.random() * carNames.length)] + " " + (Math.floor(Math.random() * 1000));
-      // const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0")}`;
+      const randomName = carNames[Math.floor(Math.random() * carNames.length)] + " + "
+        + carNames[Math.floor(Math.random() * carNames.length)];
       const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0").toUpperCase()}`;
 
 
@@ -340,7 +340,6 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
       this.getAllCars();
     });
   }
-
 
 
   onPageChange(event: any) {

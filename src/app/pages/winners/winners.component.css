@@ -1,4 +1,5 @@
 .carName {
+  white-space: nowrap;
   overflow: hidden;
   width: 100px;
   text-overflow: ellipsis;
@@ -7,6 +8,7 @@
 }
 
 .carName:hover {
+  white-space: normal;
   overflow: visible;
   text-overflow: clip;
   width: auto;

@@ -67,7 +67,6 @@
 
   .car-row {
     width: 100%;
-    background: #baea15;
     position: relative;
 
     .route {
@@ -103,6 +102,7 @@
         .material-symbols-outlined {
           font-size: 40px;
           margin-left: 0%;
+          margin-top: 5px;
         }
       }
     }

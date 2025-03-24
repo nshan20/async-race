@@ -109,6 +109,9 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
     if (!this.animationFrameId) {
       this.animate();
     }
+
+    this.updateCarText = "";
+    this.updateCarColor = "#000000";
   }
 
   stopAnimation() {
@@ -181,7 +184,6 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   startThisCar(index: number) {
-
     if (this.positions[index] < this.maxWidth) {
       if (this.positions[index] > this.maxWidth) {
         return;
@@ -193,12 +195,14 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
       cancelAnimationFrame(this.animationFrameIdArr[index]!);
       this.animationFrameIdArr[index] = null;
     }
+
+    this.updateCarText = "";
+    this.updateCarColor = "#000000";
   }
 
   resetThisCar(index: number) {
     this.positions[index] = 0;
     this.updateCarTransforms();
-    // localStorage.setItem('carPositions', JSON.stringify(this.positions));
 
     if (typeof this.animationFrameIdArr[index] === "number") {
       cancelAnimationFrame(this.animationFrameIdArr[index]);

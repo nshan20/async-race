@@ -1,8 +1,7 @@
 <div class="raceManagementPanel">
   <div class="managementPanel">
-    <button class="race" (click)="startAnimation()" > RACE</button>
-    <button class="reset" (click)="resetAnimation()"> RESET</button>
-
+    <button class="race" (click)="startAnimation()" [disabled]="!customers.length"> RACE</button>
+    <button class="reset" (click)="resetAnimation()" [disabled]="!customers.length"> RESET</button>
   </div>
   <div class="managementPanel">
     <input type="text" placeholder="TYPE CAR BRAND" [(ngModel)]="createCarText">
@@ -35,13 +34,13 @@
             <div class="car-item">
 
               <div class="car-controls">
-                <button (click)="selectCar(customer)" [disabled]="finishAnimation">SELECT</button>
-                <button (click)="removeCars(customer.id)" [disabled]="finishAnimation">REMOVE</button>
+                <button (click)="selectCar(customer)" [disabled]="finishAnimation || animationFrameIdArr[rowIndex]">SELECT</button>
+                <button (click)="removeCars(customer.id)" [disabled]="finishAnimation || animationFrameIdArr[rowIndex]">REMOVE</button>
               </div>
 
               <div class="car-controls">
-                <button (click)="startThisCar(rowIndex)" [disabled]="finishAnimation">A</button>
-                <button (click)="resetThisCar(rowIndex)" [disabled]="finishAnimation">B</button>
+                <button (click)="startThisCar(rowIndex)" [disabled]="finishAnimation || animationFrameIdArr[rowIndex]">A</button>
+                <button (click)="resetThisCar(rowIndex)" [disabled]="finishAnimation || !animationFrameIdArr[rowIndex]">B</button>
               </div>
 
               <div class="car-row">

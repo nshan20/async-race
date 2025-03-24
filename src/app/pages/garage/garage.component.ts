@@ -24,6 +24,7 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
   customers: Car[] = [];
   @ViewChild('carContainer', {static: false}) carContainer!: ElementRef;
   private animationFrameId: number | null = null;
+  animationFrameIdArr: [number | null] = [null];
   positions: number[] = [];
   private speeds: number[] = [];
   private maxWidth = 100;
@@ -63,8 +64,8 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
   private getAllCars() {
     this.carsService.getCars().subscribe((cars: Car[]) => {
       this.customers = cars;
-
-      const savedPositions = localStorage.getItem('boxPositions');
+      console.log()
+      const savedPositions = localStorage.getItem('carPositions');
       if (savedPositions) {
         this.positions = JSON.parse(savedPositions);
         this.finishAnimation = true;
@@ -115,7 +116,7 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
     if (this.animationFrameId) {
       cancelAnimationFrame(this.animationFrameId);
       this.animationFrameId = null;
-      localStorage.setItem('boxPositions', JSON.stringify(this.positions));
+      localStorage.setItem('carPositions', JSON.stringify(this.positions));
       localStorage.setItem('carSpeeds', JSON.stringify(this.speeds));
     }
   }
@@ -125,11 +126,13 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
     for (let i = 0; i < this.customers.length; i++) {
       this.positions[i] = 0;
       this.raceTimes[i] = -1;
+      this.resetThisCar(i);
     }
     this.updateCarTransforms();
-    localStorage.removeItem('boxPositions');
+    localStorage.removeItem('carPositions');
     localStorage.removeItem('carSpeeds');
     this.speedCars();
+
   }
 
 
@@ -163,7 +166,6 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
 
     if (allBoxesAtEnd) {
       this.stopAnimation();
-
     } else {
       this.animationFrameId = requestAnimationFrame(() => this.animate());
     }
@@ -186,22 +188,22 @@ export class GarageComponent implements AfterViewInit, OnInit, OnDestroy {
       }
       this.positions[index] += this.speeds[index];
       this.updateCarTransforms();
-      this.animationFrameId = requestAnimationFrame(() => this.startThisCar(index));
+      this.animationFrameIdArr[index] = requestAnimationFrame(() => this.startThisCar(index));
     } else {
-      cancelAnimationFrame(this.animationFrameId!);
-      this.animationFrameId = null;
+      cancelAnimationFrame(this.animationFrameIdArr[index]!);
+      this.animationFrameIdArr[index] = null;
     }
   }
 
   resetThisCar(index: number) {
     this.positions[index] = 0;
     this.updateCarTransforms();
-    localStorage.setItem('boxPositions', JSON.stringify(this.positions));
+    // localStorage.setItem('carPositions', JSON.stringify(this.positions));
 
-    if (typeof this.animationFrameId === "number") {
-      cancelAnimationFrame(this.animationFrameId);
+    if (typeof this.animationFrameIdArr[index] === "number") {
+      cancelAnimationFrame(this.animationFrameIdArr[index]);
     }
-    this.animationFrameId = null;
+    this.animationFrameIdArr[index] = null;
   }
 
   createCar() {
